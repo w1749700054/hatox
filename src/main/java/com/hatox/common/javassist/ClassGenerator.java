@@ -14,11 +14,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 final public class ClassGenerator {
     private final static Map<ClassLoader, ClassPool> MAP_POOL=new ConcurrentHashMap<ClassLoader, ClassPool>();
+    private static final String SIMPLE_NAME_TAG = "<init>";
     private ClassPool mPool;
     private CtClass ctClass;
     private String superClassName;
     private String className;
-    private String mInterface;
+    private List<String> mInterfaces;
     private Map<String,Method> mMethodMap=new ConcurrentHashMap<String, Method>();
     private List<String> mFields,mConstructors,mMethods;
     private boolean hasDefaultConstrust=false;
@@ -38,14 +39,24 @@ final public class ClassGenerator {
             ctClass.detach();
         }
         ctClass=mPool.makeClass(className);
+        if(superClassName!=null){
+            CtClass cc=mPool.get(superClassName);
+            ctClass.setSuperclass(cc);
+        }
+        ctClass.addInterface(mPool.get(DefaultInterface.class.getName()));
+       if(mInterfaces!=null&mInterfaces.size()>0){
+            for(String mInterface:mInterfaces){
+                ctClass.addInterface(mPool.get(mInterface));
+            }
+       }
+        for(String field:mFields){
+            ctClass.addField(CtField.make(field,ctClass));
+        }
         if (hasDefaultConstrust){
             ctClass.addConstructor(CtNewConstructor.defaultConstructor(ctClass));
         }
         for(String s:mConstructors){
-            ctClass.addConstructor(CtNewConstructor.make(s,ctClass));
-        }
-        for(String field:mFields){
-            ctClass.addField(CtField.make(field,ctClass));
+            ctClass.addConstructor(CtNewConstructor.make(s.replaceFirst("<init>",className.substring(className.lastIndexOf(".")+1,className.length())),ctClass));
         }
         for(String method:mMethods){
             ctClass.addMethod(CtMethod.make(method,ctClass));
@@ -84,9 +95,11 @@ final public class ClassGenerator {
         hasDefaultConstrust=true;
         return this;
     }
-
     public ClassGenerator setmInterface(String mInterface){
-        this.mInterface=mInterface;
+        if(mInterfaces==null){
+            mInterfaces=new ArrayList();
+        }
+        mInterfaces.add(mInterface);
         return this;
     }
 
@@ -121,5 +134,8 @@ final public class ClassGenerator {
         }
         sb.append(code);
         addMethod(sb.toString());
+    }
+    public static interface DefaultInterface{
+
     }
 }

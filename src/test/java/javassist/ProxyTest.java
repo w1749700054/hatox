@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 public class ProxyTest {
     @Test
     public void proxy_test(){
-        Proxy proxy=Proxy.getProxy(IDao.class);
+        Proxy proxy=Proxy.getProxy(IDao.class,IService.class);
         IDao instance= (IDao) proxy.newInstance(new InvocationHandler() {
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 if("getData".equals(method.getName())){
@@ -24,7 +24,20 @@ public class ProxyTest {
             }
 
         });
+        IService service= (IService) proxy.newInstance(new InvocationHandler() {
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                if("getName".equals(method.getName())){
+                    assertEquals(args.length,0);
+                }else if("addName".equals(method.getName())){
+                    assertEquals(args[0],"ming");
+                }
+                return null;
+            }
+
+        });
         instance.getData();
         instance.setData("name","value");
+        service.getName();
+        service.addName("ming");
     }
 }

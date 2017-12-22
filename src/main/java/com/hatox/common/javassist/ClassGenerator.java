@@ -44,22 +44,28 @@ final public class ClassGenerator {
             ctClass.setSuperclass(cc);
         }
         ctClass.addInterface(mPool.get(DefaultInterface.class.getName()));
-       if(mInterfaces!=null&mInterfaces.size()>0){
+       if(mInterfaces!=null&&mInterfaces.size()>0){
             for(String mInterface:mInterfaces){
                 ctClass.addInterface(mPool.get(mInterface));
             }
        }
-        for(String field:mFields){
-            ctClass.addField(CtField.make(field,ctClass));
-        }
+       if(mFields!=null) {
+           for (String field : mFields) {
+               ctClass.addField(CtField.make(field, ctClass));
+           }
+       }
         if (hasDefaultConstrust){
             ctClass.addConstructor(CtNewConstructor.defaultConstructor(ctClass));
         }
-        for(String s:mConstructors){
-            ctClass.addConstructor(CtNewConstructor.make(s.replaceFirst("<init>",className.substring(className.lastIndexOf(".")+1,className.length())),ctClass));
+        if(mConstructors!=null) {
+            for (String s : mConstructors) {
+                ctClass.addConstructor(CtNewConstructor.make(s.replaceFirst("<init>", className.substring(className.lastIndexOf(".") + 1, className.length())), ctClass));
+            }
         }
-        for(String method:mMethods){
-            ctClass.addMethod(CtMethod.make(method,ctClass));
+        if(mMethods!=null) {
+            for (String method : mMethods) {
+                ctClass.addMethod(CtMethod.make(method, ctClass));
+            }
         }
         return ctClass.toClass(classLoader,pd);
     }

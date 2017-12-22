@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 public abstract class Proxy {
-    InvocationHandler h;
     private final static AtomicLong atomicLong=new AtomicLong(0);
     public static  Proxy getProxy(Class clazz){
        return  getProxy(clazz,Proxy.class.getClassLoader());
@@ -23,6 +22,7 @@ public abstract class Proxy {
             ClassGenerator cpp=ClassGenerator.getInstance(classLoader);
 
             for(Method method:clazz.getMethods()){
+
                 Class rt=method.getReturnType();
                 Class[] pts=method.getParameterTypes();
                 Class[] ets=method.getExceptionTypes();
@@ -34,10 +34,11 @@ public abstract class Proxy {
                 }
                 code.append("Object ret=h.invoke(this,methods[").append(methods.size()).append("],args);");
                 if(!Void.TYPE.equals(rt)){
-                    code.append("return ret;");
+                    code.append("return (").append(rt.getName()).append(")ret;");
                 }
                 code.append("}");
                 cpp.addMethod(methodName,rt,ets,pts,code);
+                methods.add(method);
             }
             String className=PROXY_PKG+".Proxy"+atomicLong.getAndIncrement();
             cpp.setClassName(className);
@@ -47,14 +48,17 @@ public abstract class Proxy {
             cpp.addField("public static java.lang.reflect.Method[] methods;");
             cpp.addConstructor("public <init>(java.lang.reflect.InvocationHandler arg){this.h=$1;}");
             Class cppClass=cpp.toClass();
-            Field[] fields=cppClass.getFields();
+
             cppClass.getField("methods").
                     set(null,methods.toArray(new Method[0]));
+//            Field field=cppClass.getField("methods");
+            Object instance=cppClass.newInstance();
             String superProxy=PROXY_PKG+".proxy"+atomicLong.getAndIncrement();
             ClassGenerator csp=ClassGenerator.getInstance(classLoader);
+            csp.setClassName(superProxy);
             csp.addDefaultConstrust();
             csp.setSuperClassName(Proxy.class.getName());
-            csp.addMethod("public Object newInstance(java.lang.reflect.Invocation handler){return new "+className+"($1);");
+            csp.addMethod("public Object newInstance(java.lang.reflect.InvocationHandler h){return new "+className+"($1);}");
             return (Proxy) csp.toClass().newInstance();
         } catch (Exception e) {
             e.printStackTrace();

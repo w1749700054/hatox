@@ -141,6 +141,9 @@ final public class ClassGenerator {
         sb.append(code);
         addMethod(sb.toString());
     }
+    public static boolean isDynamicClass(Class<?> c){
+        return DefaultInterface.class.isAssignableFrom(c);
+    }
     public static interface DefaultInterface{
 
     }

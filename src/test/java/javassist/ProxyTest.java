@@ -11,6 +11,8 @@ import static org.junit.Assert.assertEquals;
 public class ProxyTest {
     @Test
     public void proxy_test(){
+//        Method[] ms;
+//        ms.length
         Proxy proxy=Proxy.getProxy(IDao.class,IService.class);
         IDao instance= (IDao) proxy.newInstance(new InvocationHandler() {
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

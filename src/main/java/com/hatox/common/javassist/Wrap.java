@@ -169,8 +169,8 @@ abstract public  class Wrap {
     }
 
 
-//    abstract  public String[] getMethodNames();
-//    abstract public boolean hasMethodName(String methodName);
+    abstract  public String[] getMethodNames();
+    abstract public boolean hasMethodName(String methodName);
     abstract  public Object getPropertyValue(Object instance,String parameterName);
     abstract  public void setPropertyValue(Object instance,String parameterName,Object pv);
     abstract public Object invoke(Object instance,String mn,Class[] classes,Object[] objs);

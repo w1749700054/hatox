@@ -38,7 +38,7 @@ public class ProxyTest {
 
         });
         instance.getData();
-        instance.setData("name","value");
+//        instance.setData("name","value");
         service.getName();
         service.addName("ming");
     }

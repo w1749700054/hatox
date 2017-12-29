@@ -8,7 +8,10 @@ public class DaoImpl  implements IDao{
         return data;
     }
 
-    public void setData(String name, String value) {
+    public void addData(String name, String value) {
+        int a=0;
+        Object o=getN();
+        System.out.println(name+"  :"+value);
     }
     public int getN(){
         return n;
@@ -20,6 +23,10 @@ public class DaoImpl  implements IDao{
 
     public void setN(int n) {
         this.n=n;
+    }
+
+    public String sayHello(String name) {
+        return "hello"+name;
     }
 
 }

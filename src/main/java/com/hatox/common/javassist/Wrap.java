@@ -3,6 +3,8 @@ package com.hatox.common.javassist;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 abstract public  class Wrap {
@@ -32,7 +34,9 @@ abstract public  class Wrap {
                 svCode.append("if(").append(fn).append(".equals(\"$2\")){").append("w.").append(fn).append("=").append(args(fieldClass,"$3"));
                 gvCode.append("if(").append(fn).append(".equals(\"$2\")){").append("return w.").append(fn).append(";");
             }
+            List<String> methodList=new ArrayList(cls.getMethods().length);
             for(Method method:cls.getMethods()){
+                methodList.add(method.getName());
                 StringBuilder sb=new StringBuilder();
                 String mn=method.getName();
                 Class rt=method.getReturnType();
@@ -80,16 +84,17 @@ abstract public  class Wrap {
             ivCode.append("throw new Exception(\" invoke \"+$2+\" is not found\");}");
             ClassGenerator ccp=ClassGenerator.getInstance(cl);
             Long id=WRAPPER_ATOM.getAndIncrement();
-            System.out.println(gvCode);
-            System.out.println(svCode);
-            System.out.println(ivCode);
             ccp.addMethod(gvCode.toString());
             ccp.addMethod(svCode.toString());
             ccp.addMethod(ivCode.toString());
+            ccp.addMethod("public String[] getMethodNames(){return methods;}");
+            ccp.addMethod("public boolean hasMethodName(String methodName){for(int i=0;i<methods.length;i++){if(methods[i].equals($1))return true;}return false;}");
+            ccp.addField("public static String[] methods;");
             ccp.setClassName(Wrap.class.getName()+id);
             ccp.setSuperClassName(Wrap.class.getName());
             ccp.addDefaultConstrust();
             Class clazz=ccp.toClass();
+            clazz.getField("methods").set(null,methodList.toArray(new String[0]));
             return (Wrap) clazz.newInstance();
         } catch (Exception e) {
             e.printStackTrace();

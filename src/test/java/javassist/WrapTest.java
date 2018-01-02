@@ -21,6 +21,8 @@ public class WrapTest {
         assertEquals(wrap.invoke(dao,"sayHello",new Class[]{String.class},new String[]{"wangmy"}),"hellowangmy");
         wrap.invoke(dao,"setN",new Class[]{Integer.class},new Integer[]{9});
         assertEquals(wrap.getPropertyValue(dao,"n"),9);
+        assertEquals(wrap.getMethodNames().length,6);
+        assertEquals(wrap.hasMethodName("getN"),true);
 
     }
 }

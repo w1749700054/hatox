@@ -7,6 +7,10 @@
       <module fileurl="file://$PROJECT_DIR$/hatox-config/hatox-config.iml" filepath="$PROJECT_DIR$/hatox-config/hatox-config.iml" />
       <module fileurl="file://$PROJECT_DIR$/hatox-config/hatox-config-api/hatox-config-api.iml" filepath="$PROJECT_DIR$/hatox-config/hatox-config-api/hatox-config-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/hatox-config/hatox-config-spring/hatox-config-spring.iml" filepath="$PROJECT_DIR$/hatox-config/hatox-config-spring/hatox-config-spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hatox-remoting/hatox-remoting.iml" filepath="$PROJECT_DIR$/hatox-remoting/hatox-remoting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hatox-remoting/hatox-remoting-api/hatox-remoting-api.iml" filepath="$PROJECT_DIR$/hatox-remoting/hatox-remoting-api/hatox-remoting-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hatox-remoting/hatox-remoting-netty/hatox-remoting-netty.iml" filepath="$PROJECT_DIR$/hatox-remoting/hatox-remoting-netty/hatox-remoting-netty.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hatox-rpc/hatox-rpc.iml" filepath="$PROJECT_DIR$/hatox-rpc/hatox-rpc.iml" />
     </modules>
   </component>
 </project>

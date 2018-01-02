@@ -11,6 +11,8 @@
     <modules>
         <module>hatox-common</module>
         <module>hatox-config</module>
+        <module>hatox-remoting</module>
+        <module>hatox-rpc</module>
     </modules>
 
     <dependencies>

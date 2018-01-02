@@ -6,11 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="hatox" />
+        <module name="hatox-common" />
+        <module name="hatox-config-api" />
+        <module name="hatox-config-spring" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="hatox" target="1.5" />
+      <module name="hatox-common" target="1.5" />
+      <module name="hatox-config" target="1.5" />
+      <module name="hatox-config-api" target="1.5" />
+      <module name="hatox-config-spring" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

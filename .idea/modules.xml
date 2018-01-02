@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/hatox.iml" filepath="$PROJECT_DIR$/hatox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hatox-common/hatox-common.iml" filepath="$PROJECT_DIR$/hatox-common/hatox-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hatox-config/hatox-config.iml" filepath="$PROJECT_DIR$/hatox-config/hatox-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hatox-config/hatox-config-api/hatox-config-api.iml" filepath="$PROJECT_DIR$/hatox-config/hatox-config-api/hatox-config-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hatox-config/hatox-config-spring/hatox-config-spring.iml" filepath="$PROJECT_DIR$/hatox-config/hatox-config-spring/hatox-config-spring.iml" />
     </modules>
   </component>
 </project>

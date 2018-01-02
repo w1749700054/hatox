@@ -6,7 +6,12 @@
 
     <groupId>hatox</groupId>
     <artifactId>hatox</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>hatox-common</module>
+        <module>hatox-config</module>
+    </modules>
 
     <dependencies>
             <dependency>

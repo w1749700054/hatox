@@ -1,0 +1,2 @@
+spi=extension.extendfactory.SpiExtensionFactory
+adaptive=extension.extendfactory.AdaptiveExtensionFactory

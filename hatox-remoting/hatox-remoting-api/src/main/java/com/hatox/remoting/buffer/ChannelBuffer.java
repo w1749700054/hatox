@@ -7,7 +7,7 @@ public interface ChannelBuffer extends Comparable<ChannelBuffer>{
     void clear();
     //copy buffer
     ChannelBuffer copy();
-    //copy buffer 从index开始，长度为length
+    //copy buffer 从index开始，长度为lengt
     ChannelBuffer copy(int index,int length);
     //回收已读空间
     void discardReadBytes();
@@ -20,8 +20,6 @@ public interface ChannelBuffer extends Comparable<ChannelBuffer>{
 
     byte getByte(int index);
 
-    void setByte(int index);
-
     void getBytes(int index,byte[] dst);
 
     void getBytes(int index,byte[]dst,int dstIndex,int length);
@@ -29,8 +27,6 @@ public interface ChannelBuffer extends Comparable<ChannelBuffer>{
     void getBytes(int index,ChannelBuffer buffer);
 
     void getBytes(int index,ChannelBuffer buffer,int length);
-
-    void setBytes(byte[] bytes);
 
     void markReaderIndex();
 
@@ -50,9 +46,21 @@ public interface ChannelBuffer extends Comparable<ChannelBuffer>{
 
     void readerIndex(int readerIndex);
 
-    void setByte(int index, int value);
+    void setBytes(byte[] bytes);
+
+    void setByte(byte b);
+
+    void setByte(int index, byte b);
 
     void setBytes(int index, byte[] src);
+
+    void setBytes(int index, byte[] src, int srcIndex, int length);
+
+    void setBytes(int index, ChannelBuffer src);
+
+    void setBytes(int index, ChannelBuffer src, int length);
+
+    void setBytes(int index,ChannelBuffer src,int srcIndex,int length);
 
     byte[] array();
 
@@ -61,5 +69,7 @@ public interface ChannelBuffer extends Comparable<ChannelBuffer>{
     void  writerIndex(int writerIndex);
 
     int writableBytes();
+
+    void setIndex(int readerIndex,int writerIndex);
 
 }

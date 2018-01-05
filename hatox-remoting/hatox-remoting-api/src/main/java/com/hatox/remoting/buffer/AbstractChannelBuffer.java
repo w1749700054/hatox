@@ -102,5 +102,33 @@ public abstract class AbstractChannelBuffer implements ChannelBuffer{
         this.readerIndex=readerIndex;
         this.writerIndex=writerIndex;
     }
+    public void setBytes(ChannelBuffer src,int srcIndex,int length){
+        setBytes(writerIndex,src,srcIndex,length);
+    }
+
+    public void writeByte(byte b){
+        setByte(writerIndex,b);
+        writerIndex++;
+    }
+
+    public void writeBytes(byte[] src){
+        setBytes(writerIndex,src,0,src.length);
+        writerIndex+=src.length;
+    }
+
+    public void writeBytes(byte[] src,int srcIndex,int length){
+        setBytes(writerIndex,src,srcIndex,length);
+        writerIndex+=length;
+    }
+
+    public void writeBytes(ChannelBuffer src){
+        setBytes(writerIndex,src,readerIndex,src.readableBytes());
+        writerIndex+=src.readableBytes();
+    }
+
+    public void writeBytes(ChannelBuffer src,int srcIndex,int length){
+        setBytes(writerIndex,src,srcIndex,length);
+        writerIndex+=length;
+    }
 
 }

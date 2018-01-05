@@ -60,6 +60,8 @@ public interface ChannelBuffer extends Comparable<ChannelBuffer>{
 
     void setBytes(int index, ChannelBuffer src, int length);
 
+    void  setBytes(ChannelBuffer src,int srcIndex,int length);
+
     void setBytes(int index,ChannelBuffer src,int srcIndex,int length);
 
     byte[] array();
@@ -71,5 +73,15 @@ public interface ChannelBuffer extends Comparable<ChannelBuffer>{
     int writableBytes();
 
     void setIndex(int readerIndex,int writerIndex);
+
+    void writeByte(byte b);
+
+    void writeBytes(byte[] src);
+
+    void writeBytes(byte[] src,int srcIndex,int length);
+
+    void writeBytes(ChannelBuffer src);
+
+    void writeBytes(ChannelBuffer src,int srcIndex,int length);
 
 }

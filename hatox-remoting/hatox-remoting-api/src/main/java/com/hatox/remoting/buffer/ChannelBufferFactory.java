@@ -7,5 +7,4 @@ public interface ChannelBufferFactory {
 
     ChannelBuffer getBuffer(byte[] array, int offset, int length);
 
-    ChannelBuffer getBuffer(ByteBuffer nioBuffer);
 }

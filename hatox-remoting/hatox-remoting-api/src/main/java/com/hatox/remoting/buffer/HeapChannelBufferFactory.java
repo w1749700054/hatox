@@ -3,7 +3,7 @@ package com.hatox.remoting.buffer;
 import java.nio.ByteBuffer;
 
 public class HeapChannelBufferFactory implements ChannelBufferFactory {
-    static ChannelBufferFactory factory=new HeapChannelBufferFactory();
+    private static ChannelBufferFactory factory=new HeapChannelBufferFactory();
     private HeapChannelBufferFactory(){
 
     }
@@ -11,17 +11,12 @@ public class HeapChannelBufferFactory implements ChannelBufferFactory {
         return factory;
     }
     @Override
-    public ChannelBuffer getBuffer(int capacity) {
-        return null;
+    public  ChannelBuffer getBuffer(int capacity) {
+        return ChannelBuffers.getBuffer(capacity);
     }
 
     @Override
     public ChannelBuffer getBuffer(byte[] array, int offset, int length) {
-        return null;
-    }
-
-    @Override
-    public ChannelBuffer getBuffer(ByteBuffer nioBuffer) {
-        return null;
+        return ChannelBuffers.getBuffer(array,offset,length);
     }
 }
